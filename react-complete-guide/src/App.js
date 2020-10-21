@@ -13,7 +13,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Person />
+        <Person name="Max" age="26" />
+        <Person name="Manu" age="28" />
       </div>
     );
   }
