@@ -7,17 +7,24 @@ class App extends Component {
     person: [
       { name: "Max", age: "26" },
       { name: "Manu", age: "28" }
-    ]
+    ],
+    otherState: "test"
   };
 
-  switchNameHandler() {
-    console.log("Function is clicked");
-  }
+  switchNameHandler = () => {
+    this.setState({
+      person: [
+        { name: "Maximillan", age: "26" },
+        { name: "Manu", age: "29" }
+      ]
+    });
+  };
 
   render() {
     return (
       <div className="App">
         <h1>Hi, I am React App</h1>
+        {/* Having this.switchNameHandler() will invoke method call during page rendering itself. */}
         <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person
           name={this.state.person[0].name}
