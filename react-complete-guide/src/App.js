@@ -30,6 +30,13 @@ class App extends Component {
     });
   };
   render() {
+    const style = {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer"
+    };
     return (
       <div className="App">
         <h1>Hi, I am React App</h1>
@@ -39,7 +46,7 @@ class App extends Component {
         </button>
         {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
         this will refer to closest scope that is to the arrow function. Using bind, scope has to passed explicitly */}
-        <button onClick={() => this.switchNameHandler("Rob")}>
+        <button style={style} onClick={() => this.switchNameHandler("Rob")}>
           Switch Name
         </button>
         <Person
