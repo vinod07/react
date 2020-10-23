@@ -19,6 +19,16 @@ class App extends Component {
       otherState: "Test" //If not defined here, this state will be lost. To avoid this multiple useStates can be used.
     });
   };
+
+  onNameChangeHandler = event => {
+    this.setState({
+      person: [
+        { name: event.target.value, age: "26" },
+        { name: "Manu", age: "29" }
+      ],
+      otherState: "Test" //If not defined here, this state will be lost. To avoid this multiple useStates can be used.
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -35,6 +45,7 @@ class App extends Component {
         <Person
           name={this.state.person[0].name}
           age={this.state.person[0].age}
+          changed={this.onNameChangeHandler}
         />
         <Person
           name={this.state.person[1].name}
