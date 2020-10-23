@@ -21,13 +21,23 @@ class App extends Component {
     });
   };
 
-  onNameChangeHandler = event => {
+  onNameChangeHandler = (event, id) => {
+    const personIndex = this.state.person.findIndex(person => {
+      return person.id === id;
+    });
+
+    const person = { ...this.state.person[personIndex] };
+
+    // const person = Object.assign({}, this.state.person[personIndex]); //Other way to fetch person without reference.
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.person];
+
+    persons[personIndex] = person;
+
     this.setState({
-      person: [
-        { id: "test1", name: event.target.value, age: "26" },
-        { id: "test2", name: "Manu", age: "29" }
-      ],
-      otherState: "Test"
+      person: persons
     });
   };
 
@@ -68,6 +78,7 @@ class App extends Component {
                 age={person.age}
                 key={person.id}
                 click={this.deletePersonsHandler}
+                changed={event => this.onNameChangeHandler(event, person.id)}
               />
             );
           })}
