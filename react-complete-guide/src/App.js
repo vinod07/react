@@ -4,8 +4,8 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     person: [
-      { name: "Max", age: "26" },
-      { name: "Manu", age: "28" }
+      { id: "test1", name: "Max", age: "26" },
+      { id: "test2", name: "Manu", age: "28" }
     ],
     otherState: "Test",
     showPersons: false
@@ -14,8 +14,8 @@ class App extends Component {
   switchNameHandler = newName => {
     this.setState({
       person: [
-        { name: "Maximillan", age: "26" },
-        { name: newName, age: "29" }
+        { id: "test1", name: "Maximillan", age: "26" },
+        { id: "test2", name: newName, age: "29" }
       ],
       otherState: "Test"
     });
@@ -24,8 +24,8 @@ class App extends Component {
   onNameChangeHandler = event => {
     this.setState({
       person: [
-        { name: event.target.value, age: "26" },
-        { name: "Manu", age: "29" }
+        { id: "test1", name: event.target.value, age: "26" },
+        { id: "test2", name: "Manu", age: "29" }
       ],
       otherState: "Test"
     });
@@ -55,6 +55,10 @@ class App extends Component {
     let persons = null;
 
     if (this.state.showPersons) {
+      {
+        /* React uses key to compare list elements in virtual dom with past verson and render only changed elements. 
+      This is useful while rendering larger list elements as it avoids rendering whole list  */
+      }
       persons = (
         <div>
           {this.state.person.map((person, index) => {
@@ -62,6 +66,7 @@ class App extends Component {
               <Person
                 name={person.name}
                 age={person.age}
+                key={person.id}
                 click={this.deletePersonsHandler}
               />
             );
