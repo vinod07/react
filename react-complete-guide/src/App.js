@@ -7,7 +7,8 @@ class App extends Component {
       { name: "Max", age: "26" },
       { name: "Manu", age: "28" }
     ],
-    otherState: "Test"
+    otherState: "Test",
+    showPersons: false
   };
 
   switchNameHandler = newName => {
@@ -16,7 +17,7 @@ class App extends Component {
         { name: "Maximillan", age: "26" },
         { name: newName, age: "29" }
       ],
-      otherState: "Test" //If not defined here, this state will be lost. To avoid this multiple useStates can be used.
+      otherState: "Test"
     });
   };
 
@@ -26,8 +27,14 @@ class App extends Component {
         { name: event.target.value, age: "26" },
         { name: "Manu", age: "29" }
       ],
-      otherState: "Test" //If not defined here, this state will be lost. To avoid this multiple useStates can be used.
+      otherState: "Test"
     });
+  };
+
+  toggleShowPersonsHandler = () => {
+    const showPerson = this.state.showPersons;
+    this.setState({ showPersons: !showPerson });
+    console.log(this.state);
   };
   render() {
     const style = {
@@ -41,26 +48,30 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I am React App</h1>
         {/* Having this.switchNameHandler() will invoke method call during page rendering itself. */}
-        <button onClick={this.switchNameHandler.bind(this, "Ram")}>
-          Switch Name
+        <button style={style} onClick={this.toggleShowPersonsHandler}>
+          Show Persons
         </button>
         {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
         this will refer to closest scope that is to the arrow function. Using bind, scope has to passed explicitly */}
         <button style={style} onClick={() => this.switchNameHandler("Rob")}>
           Switch Name
         </button>
-        <Person
-          name={this.state.person[0].name}
-          age={this.state.person[0].age}
-          changed={this.onNameChangeHandler}
-        />
-        <Person
-          name={this.state.person[1].name}
-          age={this.state.person[1].age}
-          click={this.switchNameHandler.bind(this, "Dweeb")}
-        >
-          My Hobbies: Racing
-        </Person>
+        {this.state.showPersons === true ? (
+          <div>
+            <Person
+              name={this.state.person[0].name}
+              age={this.state.person[0].age}
+              changed={this.onNameChangeHandler}
+            />
+            <Person
+              name={this.state.person[1].name}
+              age={this.state.person[1].age}
+              click={this.switchNameHandler.bind(this, "Dweeb")}
+            >
+              My Hobbies: Racing
+            </Person>
+          </div>
+        ) : null}
       </div>
     );
   }
