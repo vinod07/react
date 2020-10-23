@@ -32,7 +32,9 @@ class App extends Component {
   };
 
   deletePersonsHandler = index => {
-    const persons = this.state.person;
+    // const persons = this.state.person; //this will give reference to original person array. Modification persons elemement will also modify person array in state.
+    // const persons = this.state.person.slice(); //Alternative above line. Give the values not reference.
+    const persons = [...this.state.person]; //Modern approach using spread.
     persons.splice(index, 1);
     this.setState({ person: persons });
   };
