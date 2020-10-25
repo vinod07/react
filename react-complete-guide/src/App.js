@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import Radium from "radium";
 class App extends Component {
   state = {
     person: [
@@ -59,7 +60,11 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black"
+      }
     };
 
     let persons = null;
@@ -94,13 +99,18 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = "red";
+      //Psuedo styles are not directly supported by react. Radium is a third party module that supports pseudo styles in react.
+      style[":hover"] = {
+        backgroundColor: "salmon",
+        color: "black"
+      };
     }
     return (
       <div className="App">
         <h1>Hi, I am React App</h1>
         <p className={classes.join(" ")}>This is really working</p>
-        {/* Having this.switchNameHandler() will invoke method call during page rendering itself. */}
-        <button style={style} onClick={this.toggleShowPersonsHandler}>
+        {/* Having this.switchNameHandler() will invoke method call during page rendering itself. Added key for Radium to differentiate two buttons*/}
+        <button key="one" style={style} onClick={this.toggleShowPersonsHandler}>
           Show Persons
         </button>
         {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
@@ -114,4 +124,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
