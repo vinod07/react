@@ -64,6 +64,15 @@ class App extends Component {
 
     let persons = null;
 
+    const classes = [];
+
+    if (this.state.person.length <= 2) {
+      classes.push("red");
+    }
+    if (this.state.person.length <= 1) {
+      classes.push("bold");
+    }
+
     if (this.state.showPersons) {
       {
         /* React uses key to compare list elements in virtual dom with past verson and render only changed elements. 
@@ -89,6 +98,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi, I am React App</h1>
+        <p className={classes.join(" ")}>This is really working</p>
         {/* Having this.switchNameHandler() will invoke method call during page rendering itself. */}
         <button style={style} onClick={this.toggleShowPersonsHandler}>
           Show Persons
