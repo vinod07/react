@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium from "radium";
+import Radium, { StyleRoot } from "radium";
 class App extends Component {
   state = {
     person: [
@@ -106,20 +106,27 @@ class App extends Component {
       };
     }
     return (
-      <div className="App">
-        <h1>Hi, I am React App</h1>
-        <p className={classes.join(" ")}>This is really working</p>
-        {/* Having this.switchNameHandler() will invoke method call during page rendering itself. Added key for Radium to differentiate two buttons*/}
-        <button key="one" style={style} onClick={this.toggleShowPersonsHandler}>
-          Show Persons
-        </button>
-        {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
+      // {/* For media queries, animation stylings components need to wrapped with StyleRoot while using Radium */}
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I am React App</h1>
+          <p className={classes.join(" ")}>This is really working</p>
+          {/* Having this.switchNameHandler() will invoke method call during page rendering itself. Added key for Radium to differentiate two buttons*/}
+          <button
+            key="one"
+            style={style}
+            onClick={this.toggleShowPersonsHandler}
+          >
+            Show Persons
+          </button>
+          {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
         this will refer to closest scope that is to the arrow function. Using bind, scope has to passed explicitly */}
-        <button style={style} onClick={() => this.switchNameHandler("Rob")}>
-          Switch Name
-        </button>
-        {persons}
-      </div>
+          <button style={style} onClick={() => this.switchNameHandler("Rob")}>
+            Switch Name
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
