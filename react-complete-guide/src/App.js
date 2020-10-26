@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 import Radium, { StyleRoot } from "radium";
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  background-color: ${props => (props.alt ? "red" : "green")};
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
+    color: black;
+  }
+`;
 class App extends Component {
   state = {
     person: [
@@ -99,7 +112,7 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = "red";
-      //Psuedo styles are not directly supported by react. Radium is a third party module that supports pseudo styles in react.
+      // Psuedo styles are not directly supported by react. Radium is a third party module that supports pseudo styles in react.
       style[":hover"] = {
         backgroundColor: "salmon",
         color: "black"
@@ -121,9 +134,12 @@ class App extends Component {
           </button>
           {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
         this will refer to closest scope that is to the arrow function. Using bind, scope has to passed explicitly */}
-          <button style={style} onClick={() => this.switchNameHandler("Rob")}>
+          <StyledButton
+            alt={this.state.showPersons}
+            onClick={() => this.switchNameHandler("Rob")}
+          >
             Switch Name
-          </button>
+          </StyledButton>
           {persons}
         </div>
       </StyleRoot>
