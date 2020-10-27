@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import Person from "./Person/Person";
+import Persons from "./components/Persons/Persons";
 import Radium, { StyleRoot } from "radium";
 import styled from "styled-components";
+import Cockpit from "./components/cockpit/cockpit";
 
 const StyledButton = styled.button`
   background-color: ${props => (props.alt ? "red" : "green")};
@@ -68,70 +69,27 @@ class App extends Component {
     console.log(this.state);
   };
   render() {
-    const style = {
-      backgroundColor: "green",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
-    };
-
     let persons = null;
 
-    const classes = [];
-
-    if (this.state.person.length <= 2) {
-      classes.push("red");
-    }
-    if (this.state.person.length <= 1) {
-      classes.push("bold");
-    }
-
     if (this.state.showPersons) {
-      {
-        /* React uses key to compare list elements in virtual dom with past verson and render only changed elements. 
-      This is useful while rendering larger list elements as it avoids rendering whole list  */
-      }
       persons = (
         <div>
-          {this.state.person.map((person, index) => {
-            return (
-              <Person
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                click={this.deletePersonsHandler}
-                changed={event => this.onNameChangeHandler(event, person.id)}
-              />
-            );
-          })}
+          <Persons
+            persons={this.state.person}
+            clicked={this.deletePersonsHandler}
+            changed={this.onNameChangeHandler}
+          />
         </div>
       );
-      style.backgroundColor = "red";
-      // Psuedo styles are not directly supported by react. Radium is a third party module that supports pseudo styles in react.
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
     }
     return (
       // {/* For media queries, animation stylings components need to wrapped with StyleRoot while using Radium */}
       <StyleRoot>
         <div className="App">
-          <h1>Hi, I am React App</h1>
-          <p className={classes.join(" ")}>This is really working</p>
-          {/* Having this.switchNameHandler() will invoke method call during page rendering itself. Added key for Radium to differentiate two buttons*/}
-          <button
-            key="one"
-            style={style}
-            onClick={this.toggleShowPersonsHandler}
-          >
-            Show Persons
-          </button>
+          <Cockpit
+            persons={this.state.person}
+            clicked={this.toggleShowPersonsHandler}
+          />
           {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions
         this will refer to closest scope that is to the arrow function. Using bind, scope has to passed explicitly */}
           <StyledButton
