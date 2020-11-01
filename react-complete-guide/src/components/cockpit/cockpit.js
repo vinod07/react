@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const cockpit = props => {
+  //userEffect - An alternative componentDidMount and componentDidUpdate in functional components
+  //useEffect will be initially invoked when page is loaded and every change made to page. To restrict invocations, an array of inputs can be passed in method.
+  //With below input, useEffect is invoked when page is loaded and change is made to person input. Multiple inputs can be given in array.
+  //If useEffect is needed only on page load, pass empty array.
+  useEffect(() => {
+    console.log("[Cokcpit.js] useEffect");
+    //Http Request...
+    setTimeout(() => {
+      alert("Saved data to cloud");
+    }, 1000);
+    //return helps in clean up operations similar to ComponentWillUnMount hook in class components.
+    return () => {
+      console.log("[Cockpit.js] clean up work in useEffect");
+    };
+  }, [props.persons]);
   const style = {
     backgroundColor: "green",
     font: "inherit",
