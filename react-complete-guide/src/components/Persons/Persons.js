@@ -2,6 +2,8 @@ import Person from "./Person/Person";
 import React, { Component } from "react";
 class Persons extends Component {
   //Component will rerender if shouldComponentUpdate method returns true.
+  //While updating persons in app.js new persons array is created and then updated. This will keep the current persons reference unchanged.
+  //Hence it will be used to compare updated persons reference to existing reference during rerendering and will be rerendered only
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.persons !== this.props.persons) {
       return true;
