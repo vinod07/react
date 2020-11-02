@@ -87,7 +87,7 @@ class App extends Component {
       <StyleRoot>
         <div className="App">
           <Cockpit
-            persons={this.state.person}
+            personLength={this.state.person.length}
             clicked={this.toggleShowPersonsHandler}
           />
           {/*There are two ways to pass arguments in method. Using bind and arrow function. If using arrow functions

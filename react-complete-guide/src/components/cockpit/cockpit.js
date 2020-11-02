@@ -35,10 +35,10 @@ const cockpit = props => {
   };
   const classes = [];
 
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     classes.push("red");
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     classes.push("bold");
   }
   return (
@@ -53,4 +53,5 @@ const cockpit = props => {
   );
 };
 
-export default cockpit;
+//React.memo is similar to shouldComponentUpdate. It internally memorizes the component state and determines should component be updated during rerendering.
+export default React.memo(cockpit);
