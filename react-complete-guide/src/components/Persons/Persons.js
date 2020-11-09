@@ -1,6 +1,7 @@
 import Person from "./Person/Person";
 import React, { Component } from "react";
 class Persons extends Component {
+  //extending PureComponent instead of Component is an alternative to shouldComponentUpdate. PureComponent takes of all prop checks too.
   //Component will rerender if shouldComponentUpdate method returns true.
   //While updating persons in app.js new persons array is created and then updated. This will keep the current persons reference unchanged.
   //Hence it will be used to compare updated persons reference to existing reference during rerendering and will be rerendered only
